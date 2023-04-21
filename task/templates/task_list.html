@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Tracker</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+  
+      h1 {
+        font-size: 36px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 20px;
+      }
+  
+      nav {
+        background-color: #4CAF50;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+      }
+  
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        margin: 0 10px;
+        border-radius: 5px;
+        background-color: #3e8e41;
+      }
+  
+      nav a:hover {
+        background-color: #fff;
+        color: #4CAF50;
+        border: 2px solid #4CAF50;
+      }
+  
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        margin-bottom: 50px;
+      }
+  
+      th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+      }
+  
+      th {
+        background-color: #4CAF50;
+        color: #fff;
+      }
+  
+      tfoot th {
+        background-color: #fff;
+        border-top: 1px solid #ccc;
+        text-align: right;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+  
+      input[type="text"] {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+      }
+  
+      input[type="submit"] {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+  
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+</head>
+<body>
+<h1>LightHall LEVEL 2 - Task Tracker</h1>
+</br>
+<nav>
+  {% comment %} <ul>
+      <li><a href="/task/{{user_id}}/list/">Task List</a></li>
+      <li><a href="/task/{{user_id}}/create/">Create Task</a></li>
+      <li><a href="/task/logout/">Log out</a></li>
+  </ul> {% endcomment %}
+
+  <a href="/task/{{user_id}}/list/">Task List</a>
+  <a href="/task/{{user_id}}/create/">Create Task</a>
+  <a href="/task/logout/">Log out</a>
+
+</nav> 
+</br>
+</br>
+<table id="task_list_table" class="display nowrap" style="width:100%">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Due Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for task in tasks %}
+      <tr>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.status }}</td>
+        <td>{{ task.due_date }}</td>
+        {% comment %} <td>{{ task.due_date }}</td> {% endcomment %}
+        <td>
+          <a href="/task/{{task.pk}}/update">Edit</a>
+          <a href="/task/{{task.pk}}/delete">Delete</a>
+        </td> 
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="5">No tasks found.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Due Date</th>
+        <th>Actions</th>
+      </tr>
+  </tfoot>
+</table>
+</body>
+<footer>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#task_list_table').DataTable();
+  });
+  </script>
+</footer>
+</html>
