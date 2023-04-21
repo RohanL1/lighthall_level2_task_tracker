@@ -17,23 +17,13 @@ def log_out(request):
 
 
 def list_tasks(request,pk):
-    # tasks = [
-    #     {'title' : 'test',
-    #     'description' : 'test',
-    #     'status' : 'open',
-    #     'due_date' : '2023-01-23'
-    #     } ,
-    #     {'title' : 'abc',
-    #     'description' : 'abc',
-    #     'status' : 'in progress',
-    #     'due_date' : '2023-01-24'
-    #     } 
-    # ]
     curr_user = get_object_or_404(CustUser, id = pk)
     task = Task.objects.filter(user = curr_user)
+    
     context = {
         'user_id': curr_user.id,
-        'tasks': task
+        'tasks': task,
+        'user_name' : curr_user.username,
     }
     return render(request, 'task_list.html', context=context)
 

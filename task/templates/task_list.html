@@ -21,6 +21,14 @@
         margin-top: 50px;
         margin-bottom: 20px;
       }
+
+      h2 {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 20px;
+      }
   
       nav {
         background-color: #4CAF50;
@@ -32,6 +40,14 @@
       }
   
       nav a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        margin: 0 10px;
+        border-radius: 5px;
+        background-color: #3e8e41;
+      }
+      a {
         color: #fff;
         text-decoration: none;
         padding: 10px 20px;
@@ -99,6 +115,7 @@
 </head>
 <body>
 <h1>LightHall LEVEL 2 - Task Tracker</h1>
+<h2>Tasks of {{user_name}}</h2>
 </br>
 <nav>
   {% comment %} <ul>
